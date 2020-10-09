@@ -1,0 +1,68 @@
+table.iksweb{
+    text-decoration: none;
+    border-collapse:collapse;
+    width:auto;
+    text-align:left;
+}
+table.iksweb th{
+     font-weight:500;
+     font-size:14px; 
+     color:#fcfcfc;
+     background-color:#354251;
+}
+table.iksweb td{
+    font-size:13px;
+    color: #a9a9a9;
+}
+table.iksweb td,table.iksweb th{
+    white-space:pre-wrap;
+    padding:8px 10px;
+    line-height:13px;
+    vertical-align: middle;
+    border: 2px solid #497fa6;
+} 
+table.iksweb tr:hover{
+    background-color:#014373
+}
+table.iksweb tr:hover td{
+    color: #000000;
+    cursor:pointer;
+}
+
+#block_container{
+    display: inline-flex;
+    float: left;
+    width: 100%;
+}
+
+.view {
+    background: url(images/mainbg.jpg);
+    background-size: cover;
+}
+
+.navbar {
+    background-color: transparent;
+}
+
+.top-nav-collapse {
+    background-color: #4285F4;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar {
+        background-color: #4285F4;
+    }
+}
+
+.purple-border textarea {
+    border: 1px solid #ba68c8;
+}
+.purple-border .form-control:focus {
+    border: 1px solid #ba68c8;
+    box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
+}
+
+.green-border-focus .form-control:focus {
+    border: 1px solid #8bc34a;
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+}

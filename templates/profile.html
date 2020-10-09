@@ -1,0 +1,17 @@
+{% load socialaccount %}
+{% load i18n %}
+<h1>Django Allauth Tutorial</h1>
+{% if user.is_authenticated %}
+<p>Welcome {{ user.username }} !!!</p>
+    <p> {{ user.avatar }} </p>
+
+<form method="post" action="{% url 'account_logout' %}">
+  {% csrf_token %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+  {% endif %}
+  <button type="submit">{% trans 'Sign Out' %}</button>
+</form>
+{% else %}
+<a href="{% provider_login_url 'discord' %}">Sign Up</a>
+{% endif %}

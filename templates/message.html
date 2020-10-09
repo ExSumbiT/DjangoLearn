@@ -1,0 +1,27 @@
+{% extends 'header.html' %}
+{% block content %}
+    {% for guild in guilds %}
+            {% if guild.id == '660547829718188043' %}
+                {% if guild.permissions == 2147483647 %}
+    <div id="input_info" style=" margin-left: auto; margin-right: auto; margin-top: 5%">
+        <form method="post" action="{% url 'ClanApp:send' %}" style="color: darkgrey; margin-left: 5%; margin-right: 5%">
+            {% csrf_token %}
+        <div style="display: inline;">
+            <label for='channel'>Канал</label>
+            <select id='channel' name="channel" class="browser-default custom-select" style="background: transparent; color: darkgrey; width: 30%">
+                    {% for channel in channels %}
+                        <option value="{{ channel.id }}" style="background-color: #354251; color: #d9d9d9">{{ channel.name }}</option>
+                    {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-outline-primary btn-rounded waves-effect" style="margin: 1%">Отправить</button>
+        </div><br>
+            <div class="form-group green-border-focus">
+                <label for="content">Текст</label>
+                <textarea class="form-control" id="content" name="content" rows="20" style="background: transparent; color: darkgrey"></textarea>
+            </div>
+        </form>
+    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+{% endblock %}

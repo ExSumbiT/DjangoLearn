@@ -1,0 +1,92 @@
+{% extends 'header.html' %}
+{% load socialaccount %}
+{% load i18n %}
+
+    {% get_social_accounts user as accounts %}
+{% block content %}
+    <main class="text-center py-5" style="margin-top: 5% ">
+
+    {#    <textarea readonly id="team_name" name="field" style="margin: 0px; width: 600px; height: 400px;">#}
+    {#            {{ accounts.discord.0.data.0.content }}#}
+    {#    </textarea>#}
+    <div id="block_container">
+        {% for guild in guilds %}
+            {% if guild.id == '660547829718188043' %}
+                {% if guild.permissions == 2147483647 %}
+    <div id="input_info" style=" margin-left: auto; margin-right: auto;">
+        <form method="post" action="{% url 'ClanApp:save' %}" style="color: darkgrey">
+            {% csrf_token %}
+            <div class="md-form md-outline">
+                <label for="nick">Ник</label>
+                <input type="text" id="nick" class="form-control" name="nickname" placeholder="SumbiT"
+                       style="background: transparent; color: darkgrey">
+            </div>
+            <div class="md-form md-outline">
+                <label for="name">Имя</label>
+                <input type="text" id="name" class="form-control" name="name" placeholder="Коля"
+                       style="background: transparent; color: darkgrey">
+            </div>
+            <div class="md-form md-outline input-with-post-icon datepicker">
+                <label for="bday">Дата рождения</label>
+                <input type="date" id="bday" class="form-control" name="birthday" min="1970-01-01"
+                       max="2021-12-31" style="background: transparent; color: darkgrey">
+            </div>
+            <div class="md-form md-outline">
+                <label for="country">Страна</label>
+                <input type="text" id="country" class="form-control" name="country" placeholder="Россия"
+                       style="background: transparent; color: darkgrey">
+            </div>
+            <label for='vacation'>Отпуск</label>
+            <select id='vacation' name="vacation" class="browser-default custom-select" style="background: transparent; color: darkgrey">
+                <option selected value="Нет" style="background-color: #354251; color: #d9d9d9">Нет</option>
+                <option value="Да" style="background-color: #354251; color: #d9d9d9">Да</option>
+                <option value="Тех." style="background-color: #354251; color: #d9d9d9">Тех.</option>
+                <option value="Отс." style="background-color: #354251; color: #d9d9d9">Отс.</option>
+            </select>
+            <button type="submit" class="btn btn-outline-primary btn-rounded waves-effect" style="margin: 5%">Обновить</button>
+            <button type="submit" formaction="{% url 'ClanApp:delete' %}" class="btn btn-outline-primary btn-rounded waves-effect" style="margin: 5%">Удалить</button>
+        </form>
+    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    <div id="info" style="display: inline-flex; margin-left: auto; margin-right: auto">
+        <table class = "iksweb" id="main_members">
+        <tr><th>Nickname</th><th>Name</th><th>Bday</th><th>Age</th><th>Country</th><th>Vacation</th></tr>
+            {% for row in main_table %}
+               <tr id="{{ row.0 }}">{% for item in row %}
+                   {% if forloop.counter0 == 0  %}
+                       <td onclick="getMember('{{ item }}')">{{ item }}</td>
+                   {% else %}
+                       <td>{{ item }}</td>
+                   {% endif %}{% endfor %}</tr>
+            {% endfor %}
+        </table>
+        <table class = "iksweb" id="vac_members" style="margin-left: 10px">
+            <tr><th>Nickname</th><th>Name</th><th>Bday</th><th>Age</th><th>Country</th><th>Vacation</th></tr>
+            {% for row in vac_table %}
+               <tr id="{{ row.0 }}">{% for item in row %}
+                   {% if forloop.counter0 == 0  %}
+                       <td onclick="getMember('{{ item }}')">{{ item }}</td>
+                   {% else %}
+                       <td>{{ item }}</td>
+                   {% endif %}{% endfor %}</tr>
+            {% endfor %}
+            </table>
+    </div>
+    </div>
+    <script type="text/javascript">
+        function getMember(item) {
+            document.getElementById("nick").value = document.getElementById(item).cells[0].innerText;
+            document.getElementById("name").value = document.getElementById(item).cells[1].innerText;
+            document.getElementById("bday").value = document.getElementById(item).cells[2].innerText.split('-').reverse().join('-');
+            document.getElementById("country").value = document.getElementById(item).cells[4].innerText;
+            document.getElementById("vacation").value = document.getElementById(item).cells[5].innerText;
+        }
+    </script>
+    {#{% for n in rows|get_range %}#}
+    {#    <p>{{ n }}</p>#}
+    {#{% endfor %}#}
+    </main>
+{% endblock %}
+
